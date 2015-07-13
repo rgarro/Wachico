@@ -1,0 +1,137 @@
+
+<div class="row" style="margin-top: 5px;">
+    <div class="col-md-12">
+        <h3 class="animated flash page-header" style="font-family: 'Abril Fatface', cursive;margin-top:8px;"><i class="fa fa-key"></i> <?php echo $this->translate('Roles y Recursos');?></h3>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-green">
+            <div class="panel-heading"> Roles </div>
+            <div class="panel-body">
+                <div id="rolesContainer">
+                </div>
+                <form class="form-inline" id="addRoleFrm">
+                    <input class="form-control"
+                           oninvalid="this.setCustomValidity('<?php echo $this->translate('Nombre del Rol es requerido');?>')"
+                           placeholder="<?php echo $this->translate('Nombre Rol');?>"
+                           type="text"
+                           id="roleInput"
+                           name="role[name]"
+                           required="required"/>
+                <button class="btn btn-outline btn-default btn-sm" type="submit">
+                    <i class="fa fa-plus"></i>
+                </button>
+                </form>
+            </div>
+            <div class="panel-footer">&nbsp;</div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-green">
+            <div class="panel-heading"> <?php echo $this->translate('Recursos');?></div>
+            <div class="panel-body" id="resourceTabs">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li><a href="#newresourceform" data-toggle="tab"><i class="fa fa-plus"></i> <?php echo $this->translate('Crear');?></a>
+                    </li>
+                    <li><a href="#resourcelist" data-toggle="tab"><i class="fa fa-th-list"></i> <?php echo $this->translate('Lista');?></a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane fade" id="newresourceform">
+                        <form id="newResourceFrm" class="form-horizontal">
+                            <fieldset class="well">
+                                <input class="form-control"
+                                       placeholder="<?php echo $this->translate('Etiqueta');?>"
+                                       type="text"
+                                       id="resourceLabelInput"
+                                       name="resource[label]"
+                                       required="required"/>
+                                <br>
+                                <input class="form-control"
+                                       placeholder="/path/to/action/"
+                                       pattern="/[^\0]+/"
+                                       id="resourcePathInput"
+                                       name="resource[path]"
+                                       required="required"/>
+                                <br>
+                                <input class="form-control"
+                                       placeholder="Module"
+                                       type="text"
+                                       id="resourceModuleInput"
+                                       name="resource[module]"
+                                       required="required"/>
+                                <br>
+                                <input class="form-control"
+                                       placeholder="Controller"
+                                       type="text"
+                                       id="resourceControllerInput"
+                                       name="resource[controller]"
+                                       required="required"/>
+                                <br>
+                                <input class="form-control"
+                                       placeholder="Action"
+                                       type="text"
+                                       id="resourceActionInput"
+                                       name="resource[action]"
+                                       required="required"/>
+                                <br>
+                                <button class="btn btn-outline btn-warning btn-sm" type="reset">
+                                    <i class="fa fa-power-off"></i> <?php echo $this->translate('Reset');?>
+                                </button>
+                                <button class="btn btn-outline btn-default btn-sm" type="submit">
+                                    <i class="fa fa-plus-circle"></i> <?php echo $this->translate('Recurso');?>
+                                </button>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade active in" id="resourcelist">
+                        <div id="recursosContainer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">&nbsp;</div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade modal-lg" id="roleRecursosModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-sitemap"></i> Asignar Role Recursos</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div id="roleResourcesFormContainer" class="col-md-12">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-outline btn-sm btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $(role.opt.addFrm).on("submit",function(e){
+            e.preventDefault();
+            role.add($(role.opt.addFrm).serializeHash());
+            return false;
+        });
+        $(recurso.opt.addFrm).on("submit",function(e){
+            e.preventDefault();
+            recurso.add($(recurso.opt.addFrm).serializeHash());
+            return false;
+        });
+    });
+    role.init();
+    recurso.init();
+</script>

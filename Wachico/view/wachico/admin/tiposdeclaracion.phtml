@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h3 class="animated flash page-header" style="font-family: 'Abril Fatface', cursive;margin-top:8px;"><i class="fa fa-th-list"></i> <?php echo $this->translate('Tipos de Declaración'); ?></h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-green">
+            <div class="panel-heading"><i class="fa fa-plane"></i> <?php echo $this->translate('Lista'); ?></div>
+            <div id="tdListContainer" class="panel-body"></div>
+            <div class="panel-footer">
+                <form id="addTipodeclaracionFrm" class="form-horizontal">
+                    <input class="form-control"
+                           placeholder="<?php echo $this->translate('Etiqueta');?>"
+                           type="text"
+                           id="tipodeclaracionLabelInput"
+                           name="tipodeclaracion[label]"
+                           required="required"/>
+                    <br>
+                    <input class="form-control"
+                           placeholder="Información:{'etiqueta':'tipo','etiqueta':'tipo'}"
+                           pattern="/^\{\s*\".*\}$/"
+                           id="tipodeclaracionInfo_fieldsInput"
+                           name="tipodeclaracion[info_fields]"
+                           required="required"/>
+                    <br>
+                    <input class="form-control"
+                           placeholder="tiquetes:{'etiqueta':'tipo','etiqueta':'tipo'}"
+                           pattern="/^\{\s*\".*\}$/"
+                           id="tipodeclaracionTicket_fieldsInput"
+                           name="tipodeclaracion[ticket_fields]"
+                           required="required"/>
+                    <br>
+                    <button class="btn btn-outline btn-warning btn-sm" type="reset">
+                        <i class="fa fa-power-off"></i> <?php echo $this->translate('Reset');?>
+                    </button>
+                    <button class="btn btn-outline btn-default btn-sm" type="submit">
+                        <i class="fa fa-plus-circle"></i> <?php echo $this->translate('Tipo de Declaración');?>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+
+       $(td.opt.addFrm).on("submit",function(e){
+            e.preventDefault();
+            td.add($(td.opt.addFrm).serializeHash());
+            return false;
+        });
+    });
+
+    td.init();
+</script>

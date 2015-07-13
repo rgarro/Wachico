@@ -1,0 +1,34 @@
+<form id="roleRecursosFrm" class="form-horizontal">
+    <input type="hidden" name="role_id" value="<?php echo $role_id;?>" />
+    <table class="table table-striped table-bordered table-hover">
+        <?php
+        $i = 0;
+        foreach($resources as $r) {
+            ?>
+            <tr>
+                <td>
+                    <input id="role_path_<?php echo $i;?>" type="checkbox" name="resources[<?php echo $i;?>]"  value="<?php echo $r->getPath();?>"/>
+                    <?php echo $r->getLabel();?> <small><?php echo $r->getPath();?></small>
+                </td>
+            </tr>
+        <?php
+            $i++;
+        }
+        ?>
+    </table>
+    <br>
+    <button class="btn btn-outline btn-warning btn-sm" type="reset">
+        <i class="fa fa-power-off"></i> <?php echo $this->translate('Reset');?>
+    </button>
+    <button type="submit" class="btn btn-outline btn-success btn-sm"><i class="fa fa-gears"></i> Asignar</button>
+</form>
+<script>
+    $(document).ready(function(){
+        var selected = new Array();
+        $(role.opt.roleRecursosFrm).on("submit",function(e){
+            e.preventDefault();
+            role.doRoleRecursos($(role.opt.roleRecursosFrm).serializeHash());
+            return false;
+        });
+    });
+</script>
